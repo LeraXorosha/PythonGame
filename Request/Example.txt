@@ -1,0 +1,3 @@
+ALTER TABLE tbl_name ADD FOREIGN KEY [tbl_name] REFERENCES [tbl_name] (col_name,...) 
+
+ALTER TABLE students ADD PRIMARY KEY (class_id, student_id);

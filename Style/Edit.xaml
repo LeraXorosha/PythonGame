@@ -1,0 +1,41 @@
+<Grid  Margin="50,50,50,50">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="300"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <StackPanel Grid.Row="1" Grid.Column="0">
+        <TextBlock Text="Адрес" Grid.Row="0" Grid.Column="0" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="5,15,5,0"/>
+        <ComboBox  SelectedItem="{Binding Помещение1}" Grid.Row="0" Grid.Column="1" x:Name="ComboAddress" DisplayMemberPath="Адрес"  HorizontalAlignment="Left" Width="280"/>
+
+        <TextBlock Text="Клиент" Grid.Row="1" Grid.Column="0" FontFamily="Arial Black" Margin="5,15,5,0"/>
+        <ComboBox  SelectedItem="{Binding Клиент1}" Grid.Row="1" Grid.Column="1" x:Name="ComboClient" DisplayMemberPath="ФИО"  Width="280" HorizontalAlignment="Left"/>
+
+        <TextBlock Text="Дата исполнения" Grid.Row="2" Grid.Column="0" FontFamily="Arial Black " Margin="5,15,5,0"/>
+        <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Дата_исполнения, Mode=TwoWay}" Width="280" Height="40" HorizontalAlignment="Left"/>
+
+        <TextBlock Text="Исполнитель" Grid.Row="3" Grid.Column="0" FontFamily="Arial Black" Margin="5,15,5,0"/>
+        <ComboBox  SelectedItem="{Binding Сотрудник}" Grid.Row="3" Grid.Column="1"  x:Name="ComboEmployee" DisplayMemberPath="ФИО" Width="280"  HorizontalAlignment="Left"/>
+
+        <TextBlock Text="Тип уборки" Grid.Row="4" Grid.Column="0" FontFamily="Arial Black" Margin="5,15,5,0"/>
+        <ComboBox  SelectedItem="{Binding C_Тип_уборки_}" Grid.Row="4" Grid.Column="1"  x:Name="ComboTypeClean" DisplayMemberPath="Название" Width="280"  HorizontalAlignment="Left"/>
+
+        <Button Content="Сохранить" Name ="BtnSave" Grid.Row="6" Grid.Column="0"  HorizontalAlignment="Center"  VerticalAlignment="Bottom" Click="BtnSave_Click" Margin="0,30,0,5"/>
+
+    </StackPanel>
+
+    <StackPanel Grid.Column="1">
+        <TextBlock Text="Улуги в заявке" HorizontalAlignment="Center" Margin="0,15,0,5"/>
+        <DataGrid x:Name ="DGridService"  AutoGenerateColumns="False" IsReadOnly="True" >
+            <DataGrid.Columns >
+                <DataGridCheckBoxColumn />
+                <DataGridTextColumn Binding='{Binding C_Дополнительные_услуги_.Название}' Header="Услуга"/>
+                <DataGridTextColumn Binding='{Binding Количество}' Header="Количество"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Grid>

@@ -1,0 +1,99 @@
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="960"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="80"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="50"/>
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0" Grid.Column="0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Поиск по адресу помещения:" Grid.Column="0" Grid.Row="0"/>
+            <TextBox Grid.Column="0" Grid.Row="1" Height="40" Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged"/>
+            <TextBlock Text="Выбор клиента:" Grid.Column="1" Grid.Row="0"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" Name="ComboClient" SelectionChanged="ComboClient_SelectionChanged" DisplayMemberPath="ФИО"/>
+            <TextBlock Text="Сортировка завок по площади:" Grid.Column="2" Grid.Row="0"/>
+            <ComboBox Grid.Column="2" Grid.Row="1" Name="SortSquare" SelectionChanged="SortSquare_SelectionChanged">
+                <ComboBoxItem Content="По умолчанию"/>
+                <ComboBoxItem Content="По возрастанию"/>
+                <ComboBoxItem Content="По убыванию"/>
+            </ComboBox>
+        </Grid>
+    </StackPanel>
+
+    <StackPanel Grid.Row="0" Grid.Column="1">
+        <Grid Height="80" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180*"/>
+                <ColumnDefinition Width="130*"/>
+                <ColumnDefinition Width="175*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Количество записей: " Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Margin="0,5,0,0"/>
+            <TextBlock Grid.Column="1"  Name="CountRequest" Grid.Row="1" HorizontalAlignment="Left"  Margin="5,0,0,0"/>
+            <TextBlock Grid.Column="1" Name="NoResultsText" Grid.Row="1" HorizontalAlignment="Left" Background="Red"/>
+
+            <Button Content ="Сбросить фильтры" Grid.Column="2"  Grid.Row="1" Width="135"  Name="ReturnFilter" Click="ReturnFilter_Click" HorizontalAlignment="Center" Height="30"/>
+        </Grid>
+    </StackPanel>
+
+    <DataGrid x:Name="DGridRequests" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" Grid.Column="0" Margin="20,40,20,20">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="№" Binding = '{Binding Id}' Width="auto" />
+            <DataGridTextColumn Header="Клиент" Binding='{Binding Клиент1.ФИО}' Width="auto"/>
+            <DataGridTextColumn Header="Телефон" Binding='{Binding Клиент1.Телефон}' Width="auto"/>
+            <DataGridTextColumn Header="Адрес" Binding='{Binding Помещение1.Адрес}' Width="auto"/>
+            <DataGridTextColumn Header="Тип Помещения" Binding='{Binding Помещение1.C_Тип_помещения_.Название}'  Width="auto"/>
+            <DataGridTextColumn Header="Площадь(кв.м)" Binding='{Binding Помещение1.Площадь}'  Width="auto"/>
+            <DataGridTextColumn Header="Тип уборки" Binding='{Binding C_Тип_уборки_.Название}'  Width="auto"/>
+
+            <DataGridTemplateColumn Width="95">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="Удалить" Name="BtnDelete" Click="BtnDelete_Click"   Width="80" Background="#FFFE7368"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Width="95">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="Изменить" Name="BtnEdit" Click="BtnEdit_Click"  Width="80" Background="#FF2174D7"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+
+    <Button Grid.Row="2" Grid.Column="0" Name ="BtnAdd" Content="Добавить" Click="BtnAdd_Click" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+
+    <Label Content="УСЛУГИ В ЗАЯВКЕ" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"/>
+    <DataGrid x:Name="DGridServices" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="20,40,20,20">
+
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="№ заявки" Binding = '{Binding Номер_заявки}' Width="auto" />
+            <DataGridTextColumn Header="Услуга" Binding = '{Binding C_Дополнительные_услуги_.Название}' Width="auto" />
+            <DataGridTextColumn Header="Количество" Binding = '{Binding Количество}' Width="auto" />
+        </DataGrid.Columns>
+    </DataGrid>
+
+    <Button Grid.Row="2" Grid.Column="1" Name ="BtnStatistic" Content="Статистика" Click="BtnAdd_Click" HorizontalAlignment="Right"  Margin="0,0,20,0"/>
+</Grid>
